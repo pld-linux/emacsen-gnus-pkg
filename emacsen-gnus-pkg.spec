@@ -1,7 +1,7 @@
-%bcond_without  xemacs  # Build without XEmacs support
-%bcond_without  emacs   # Build without GNU Emacs support
-%bcond_without  pdf_doc # Don't build PDF documentation
-%define         _the_name gnus
+%bcond_without	xemacs	# Build without XEmacs support
+%bcond_without	emacs	# Build without GNU Emacs support
+%bcond_without	pdf_doc	# Don't build PDF documentation
+%define		_the_name gnus
 Summary:	An Emacs/XEmacs newsreader and mail client
 Summary(pl):	Czytnik grup dyskusyjnych i klient poczty dla Emacsa/XEmacsa
 Name:		emacsen-gnus-pkg
@@ -10,39 +10,35 @@ Release:	1
 License:	GPL
 Group:		Applications/Networking
 Source0:	http://www.gnus.org/dist/%{_the_name}-%{version}.tar.gz
-# Source0-md5:  8b510e5d2530f92af371eb64f828b257
+# Source0-md5:	8b510e5d2530f92af371eb64f828b257
 Patch0:		%{name}-destdir.patch
 URL:		http://www.gnus.org/
-
-Conflicts:      xemacs-gnus-pkg
-Requires:       gnus-elisp-code = %{version}-%{release}
-BuildArch:      noarch
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
 %if %{with pdf_doc}
-BuildRequires:  texinfo-texi2dvi
-BuildRequires:  tetex-latex
-BuildRequires:  tetex-makeindex
-BuildRequires:  tetex-dvips
-BuildRequires:  tetex-format-pdftex
+BuildRequires:	texinfo-texi2dvi
+BuildRequires:	tetex-latex
+BuildRequires:	tetex-makeindex
+BuildRequires:	tetex-dvips
+BuildRequires:	tetex-format-pdftex
 %endif
-
 %if %{with emacs}
 BuildRequires:	emacs
 %endif
-
 %if %{with xemacs}
 BuildRequires:	xemacs
-BuildRequires:  xemacs-mail-lib-pkg
-BuildRequires:  xemacs-eterm-pkg
-BuildRequires:  xemacs-sh-script-pkg
-BuildRequires:  xemacs-os-utils-pkg
-BuildRequires:  xemacs-dired-pkg
-BuildRequires:  xemacs-mh-e-pkg
-BuildRequires:  xemacs-mailcrypt-pkg
-BuildRequires:  xemacs-fsf-compat-pkg
-BuildRequires:  xemacs-texinfo-pkg
+BuildRequires:	xemacs-mail-lib-pkg
+BuildRequires:	xemacs-eterm-pkg
+BuildRequires:	xemacs-sh-script-pkg
+BuildRequires:	xemacs-os-utils-pkg
+BuildRequires:	xemacs-dired-pkg
+BuildRequires:	xemacs-mh-e-pkg
+BuildRequires:	xemacs-mailcrypt-pkg
+BuildRequires:	xemacs-fsf-compat-pkg
+BuildRequires:	xemacs-texinfo-pkg
 %endif
+Requires:	gnus-elisp-code = %{version}-%{release}
+Conflicts:	xemacs-gnus-pkg
+BuildArch:	noarch
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 You can read news (and mail) from within GNU Emacs or XEmacs by using
@@ -52,9 +48,9 @@ Gnus. The news can be gotten by any nefarious means you can think of
 This package contains files common to both GNU Emacs and XEmacs.
 
 %description -l pl
-Dziêki pakietowi Gnus mo¿esz czytaæ newsy i pocztê z u¿yciem
-GNU Emacsa lub XEmacsa.  Gnus mo¿e pobieraæ listy z najró¿niejszych
-¼róde³, w tym z serwera NNTP, lokalnego spoola jak i plików mbox.
+Dziêki pakietowi Gnus mo¿esz czytaæ newsy i pocztê z u¿yciem GNU
+Emacsa lub XEmacsa. Gnus mo¿e pobieraæ listy z najró¿niejszych ¼róde³,
+w tym z serwera NNTP, lokalnego spoola jak i plików mbox.
 
 Ten pakiet zawiera pliki Gnusa wspólne dla GNU Emacsa i XEmacsa.
 
@@ -65,9 +61,9 @@ Ten pakiet zawiera pliki Gnusa wspólne dla GNU Emacsa i XEmacsa.
 Summary:	Gnus elisp files for GNU Emacs
 Summary(pl):	Kod elisp Gnusa dla GNU Emacsa
 Group:		Applications/Networking
-Provides:       gnus-elisp-code = %{version}-%{release}
-Requires:       %{name} = %{version}-%{release}
-Requires:       emacs = %{version_of emacs}
+Requires:	%{name} = %{version}-%{release}
+Requires:	emacs = %{version_of emacs}
+Provides:	gnus-elisp-code = %{version}-%{release}
 
 %description emacs
 This package contains compiled elisp files needed to run Gnus on GNU Emacs
@@ -79,7 +75,7 @@ Pakiet zawiera skompilowane pliki elisp z kodem Gnusa dla GNU Emacsa.
 Summary:	Gnus elisp source files for GNU Emacs
 Summary(pl):	Kod ¼ród³owy elisp Gnusa dla GNU Emacsa
 Group:		Applications/Networking
-Requires:       %{name}-emacs = %{version}-%{release}
+Requires:	%{name}-emacs = %{version}-%{release}
 
 %description emacs-el
 This package contains source elisp files needed to run Gnus on GNU Emacs
@@ -94,17 +90,17 @@ Pakiet zawiera ¼ród³owe pliki elisp z kodem Gnusa dla GNU Emacsa.
 Summary:	Gnus elisp files for XEmacs
 Summary(pl):	Kod elisp Gnusa dla XEmacsa
 Group:		Applications/Networking
-Provides:       gnus-elisp-code = %{version}-%{release}
-Requires:       %{name} = %{version}-%{release}
-Requires:       xemacs = %{version_of xemacs}
-Requires:       xemacs-mail-lib-pkg
-Requires:       xemacs-eterm-pkg
-Requires:       xemacs-sh-script-pkg
-Requires:       xemacs-os-utils-pkg
-Requires:       xemacs-dired-pkg
-Requires:       xemacs-mh-e-pkg
-Requires:       xemacs-mailcrypt-pkg
-Requires:       xemacs-fsf-compat-pkg
+Requires:	%{name} = %{version}-%{release}
+Requires:	xemacs = %{version_of xemacs}
+Requires:	xemacs-mail-lib-pkg
+Requires:	xemacs-eterm-pkg
+Requires:	xemacs-sh-script-pkg
+Requires:	xemacs-os-utils-pkg
+Requires:	xemacs-dired-pkg
+Requires:	xemacs-mh-e-pkg
+Requires:	xemacs-mailcrypt-pkg
+Requires:	xemacs-fsf-compat-pkg
+Provides:	gnus-elisp-code = %{version}-%{release}
 
 %description xemacs
 This package contains compiled elisp files needed to run Gnus on XEmacs
@@ -116,7 +112,7 @@ Pakiet zawiera skompilowane pliki elisp z kodem Gnusa dla XEmacsa.
 Summary:	Gnus elisp source files for XEmacs
 Summary(pl):	Kod ¼ród³owy elisp Gnusa dla XEmacsa
 Group:		Applications/Networking
-Requires:       %{name}-xemacs = %{version}-%{release}
+Requires:	%{name}-xemacs = %{version}-%{release}
 
 %description xemacs-el
 This package contains source elisp files needed to run Gnus on XEmacs
@@ -151,9 +147,9 @@ mkdir DUMMY
 %if %{with xemacs}
 
 %configure \
-    --with-xemacs \
-    --with-lispdir=%{_datadir}/xemacs-packages/lisp/%{_the_name} \
-    --with-etcdir=%{_datadir}/%{_the_name}
+	--with-xemacs \
+	--with-lispdir=%{_datadir}/xemacs-packages/lisp/%{_the_name} \
+	--with-etcdir=%{_datadir}/%{_the_name}
 %{__make}
 
 %if %{without emacs} && %{with pdf_doc}
@@ -168,9 +164,9 @@ mkdir DUMMY
 %if %{with emacs}
 
 %configure \
-    --with-emacs \
-    --with-lispdir=%{_emacs_lispdir}/%{_the_name} \
-    --with-etcdir=%{_datadir}/%{_the_name}
+	--with-emacs \
+	--with-lispdir=%{_emacs_lispdir}/%{_the_name} \
+	--with-etcdir=%{_datadir}/%{_the_name}
 %{__make}
 
 %if %{with pdf_doc}
