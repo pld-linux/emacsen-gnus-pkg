@@ -1,17 +1,16 @@
 %bcond_without	xemacs	# Build without XEmacs support
 %bcond_without	emacs	# Build without GNU Emacs support
 %bcond_without	pdf_doc	# Don't build PDF documentation
-%define		_the_name ngnus
-%define		_no_gnus_version 0.2
+%define		_the_name gnus
 Summary:	An Emacs/XEmacs newsreader and mail client
 Summary(pl):	Czytnik grup dyskusyjnych i klient poczty dla Emacsa/XEmacsa
 Name:		emacsen-gnus-pkg
-Version:	5.12.0
-Release:	0.ngnus%{_no_gnus_version}.1
+Version:	5.10.6
+Release:	1
 License:	GPL
 Group:		Applications/Networking
-Source0:	http://www.gnus.org/dist/%{_the_name}-%{_no_gnus_version}.tar.gz
-# Source0-md5:	0d7bb41c544a8b908935bca55db4925e
+Source0:	http://www.gnus.org/dist/%{_the_name}-%{version}.tar.gz
+# Source0-md5:	8b510e5d2530f92af371eb64f828b257
 Patch0:		%{name}-destdir.patch
 URL:		http://www.gnus.org/
 %if %{with pdf_doc}
@@ -138,7 +137,7 @@ Dokumentacja Gnusa w formacie PDF
 
 
 %prep
-%setup -q -n %{_the_name}-%{_no_gnus_version}
+%setup -q -n %{_the_name}-%{version}
 %patch0 -p1
 
 
