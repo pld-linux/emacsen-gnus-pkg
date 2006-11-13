@@ -153,7 +153,7 @@ mkdir DUMMY
 	--with-etcdir=%{_datadir}/%{_the_name}
 %{__make}
 
-%if %{without emacs} && %{with pdf_doc}
+%if !%{with emacs} && %{with pdf_doc}
 %{__make} -C texi pdf
 %endif
 
