@@ -3,7 +3,7 @@
 %bcond_without	pdf_doc	# Don't build PDF documentation
 %define		_the_name gnus
 Summary:	An Emacs/XEmacs newsreader and mail client
-Summary(pl.UTF-8):   Czytnik grup dyskusyjnych i klient poczty dla Emacsa/XEmacsa
+Summary(pl.UTF-8):	Czytnik grup dyskusyjnych i klient poczty dla Emacsa/XEmacsa
 Name:		emacsen-gnus-pkg
 Version:	5.10.6
 Release:	3
@@ -60,7 +60,7 @@ Ten pakiet zawiera pliki Gnusa wspólne dla GNU Emacsa i XEmacsa.
 %if %{with emacs}
 %package emacs
 Summary:	Gnus elisp files for GNU Emacs
-Summary(pl.UTF-8):   Kod elisp Gnusa dla GNU Emacsa
+Summary(pl.UTF-8):	Kod elisp Gnusa dla GNU Emacsa
 Group:		Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	emacs = %{version_of emacs}
@@ -74,7 +74,7 @@ Pakiet zawiera skompilowane pliki elisp z kodem Gnusa dla GNU Emacsa.
 
 %package emacs-el
 Summary:	Gnus elisp source files for GNU Emacs
-Summary(pl.UTF-8):   Kod źródłowy elisp Gnusa dla GNU Emacsa
+Summary(pl.UTF-8):	Kod źródłowy elisp Gnusa dla GNU Emacsa
 Group:		Applications/Networking
 Requires:	%{name}-emacs = %{version}-%{release}
 
@@ -89,7 +89,7 @@ Pakiet zawiera źródłowe pliki elisp z kodem Gnusa dla GNU Emacsa.
 %if %{with xemacs}
 %package xemacs
 Summary:	Gnus elisp files for XEmacs
-Summary(pl.UTF-8):   Kod elisp Gnusa dla XEmacsa
+Summary(pl.UTF-8):	Kod elisp Gnusa dla XEmacsa
 Group:		Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	xemacs = %{version_of xemacs}
@@ -111,7 +111,7 @@ Pakiet zawiera skompilowane pliki elisp z kodem Gnusa dla XEmacsa.
 
 %package xemacs-el
 Summary:	Gnus elisp source files for XEmacs
-Summary(pl.UTF-8):   Kod źródłowy elisp Gnusa dla XEmacsa
+Summary(pl.UTF-8):	Kod źródłowy elisp Gnusa dla XEmacsa
 Group:		Applications/Networking
 Requires:	%{name}-xemacs = %{version}-%{release}
 
@@ -126,7 +126,7 @@ Pakiet zawiera pliki źródłowe elisp z kodem Gnusa dla XEmacsa.
 %if %{with pdf_doc}
 %package pdf-doc
 Summary:	PDF documentation for Gnus
-Summary(pl.UTF-8):   Dokumentacja Gnusa w formacie PDF
+Summary(pl.UTF-8):	Dokumentacja Gnusa w formacie PDF
 Group:		Documentation
 
 %description pdf-doc
