@@ -3,7 +3,7 @@
 %bcond_without	pdf_doc	# Don't build PDF documentation
 %define		_the_name gnus
 Summary:	An Emacs/XEmacs newsreader and mail client
-Summary(pl):	Czytnik grup dyskusyjnych i klient poczty dla Emacsa/XEmacsa
+Summary(pl.UTF-8):   Czytnik grup dyskusyjnych i klient poczty dla Emacsa/XEmacsa
 Name:		emacsen-gnus-pkg
 Version:	5.10.6
 Release:	3
@@ -48,19 +48,19 @@ Gnus. The news can be gotten by any nefarious means you can think of
 
 This package contains files common to both GNU Emacs and XEmacs.
 
-%description -l pl
-Dziêki pakietowi Gnus mo¿esz czytaæ newsy i pocztê z u¿yciem GNU
-Emacsa lub XEmacsa. Gnus mo¿e pobieraæ listy z najró¿niejszych ¼róde³,
-w tym z serwera NNTP, lokalnego spoola jak i plików mbox.
+%description -l pl.UTF-8
+DziÄ™ki pakietowi Gnus moÅ¼esz czytaÄ‡ newsy i pocztÄ™ z uÅ¼yciem GNU
+Emacsa lub XEmacsa. Gnus moÅ¼e pobieraÄ‡ listy z najrÃ³Å¼niejszych ÅºrÃ³deÅ‚,
+w tym z serwera NNTP, lokalnego spoola jak i plikÃ³w mbox.
 
-Ten pakiet zawiera pliki Gnusa wspólne dla GNU Emacsa i XEmacsa.
+Ten pakiet zawiera pliki Gnusa wspÃ³lne dla GNU Emacsa i XEmacsa.
 
 %define version_of() %{expand:%%(rpm -q %1 --queryformat '%%%%{version}-%%%%{release}')}
 
 %if %{with emacs}
 %package emacs
 Summary:	Gnus elisp files for GNU Emacs
-Summary(pl):	Kod elisp Gnusa dla GNU Emacsa
+Summary(pl.UTF-8):   Kod elisp Gnusa dla GNU Emacsa
 Group:		Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	emacs = %{version_of emacs}
@@ -69,27 +69,27 @@ Provides:	gnus-elisp-code = %{version}-%{release}
 %description emacs
 This package contains compiled elisp files needed to run Gnus on GNU Emacs
 
-%description emacs -l pl
+%description emacs -l pl.UTF-8
 Pakiet zawiera skompilowane pliki elisp z kodem Gnusa dla GNU Emacsa.
 
 %package emacs-el
 Summary:	Gnus elisp source files for GNU Emacs
-Summary(pl):	Kod ¼ród³owy elisp Gnusa dla GNU Emacsa
+Summary(pl.UTF-8):   Kod ÅºrÃ³dÅ‚owy elisp Gnusa dla GNU Emacsa
 Group:		Applications/Networking
 Requires:	%{name}-emacs = %{version}-%{release}
 
 %description emacs-el
 This package contains source elisp files needed to run Gnus on GNU Emacs
 
-%description emacs-el -l pl
-Pakiet zawiera ¼ród³owe pliki elisp z kodem Gnusa dla GNU Emacsa.
+%description emacs-el -l pl.UTF-8
+Pakiet zawiera ÅºrÃ³dÅ‚owe pliki elisp z kodem Gnusa dla GNU Emacsa.
 %endif
 
 
 %if %{with xemacs}
 %package xemacs
 Summary:	Gnus elisp files for XEmacs
-Summary(pl):	Kod elisp Gnusa dla XEmacsa
+Summary(pl.UTF-8):   Kod elisp Gnusa dla XEmacsa
 Group:		Applications/Networking
 Requires:	%{name} = %{version}-%{release}
 Requires:	xemacs = %{version_of xemacs}
@@ -106,33 +106,33 @@ Provides:	gnus-elisp-code = %{version}-%{release}
 %description xemacs
 This package contains compiled elisp files needed to run Gnus on XEmacs
 
-%description xemacs -l pl
+%description xemacs -l pl.UTF-8
 Pakiet zawiera skompilowane pliki elisp z kodem Gnusa dla XEmacsa.
 
 %package xemacs-el
 Summary:	Gnus elisp source files for XEmacs
-Summary(pl):	Kod ¼ród³owy elisp Gnusa dla XEmacsa
+Summary(pl.UTF-8):   Kod ÅºrÃ³dÅ‚owy elisp Gnusa dla XEmacsa
 Group:		Applications/Networking
 Requires:	%{name}-xemacs = %{version}-%{release}
 
 %description xemacs-el
 This package contains source elisp files needed to run Gnus on XEmacs
 
-%description xemacs-el -l pl
-Pakiet zawiera pliki ¼ród³owe elisp z kodem Gnusa dla XEmacsa.
+%description xemacs-el -l pl.UTF-8
+Pakiet zawiera pliki ÅºrÃ³dÅ‚owe elisp z kodem Gnusa dla XEmacsa.
 %endif
 
 
 %if %{with pdf_doc}
 %package pdf-doc
 Summary:	PDF documentation for Gnus
-Summary(pl):	Dokumentacja Gnusa w formacie PDF
+Summary(pl.UTF-8):   Dokumentacja Gnusa w formacie PDF
 Group:		Documentation
 
 %description pdf-doc
 Documentation for Gnus in PDF format
 
-%description pdf-doc -l pl
+%description pdf-doc -l pl.UTF-8
 Dokumentacja Gnusa w formacie PDF
 %endif
 
