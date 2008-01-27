@@ -1,6 +1,9 @@
+#
+# Conditional build:
 %bcond_without	xemacs	# Build without XEmacs support
 %bcond_without	emacs	# Build without GNU Emacs support
 %bcond_without	pdf_doc	# Don't build PDF documentation
+#
 %define		_the_name gnus
 Summary:	An Emacs/XEmacs newsreader and mail client
 Summary(pl.UTF-8):	Czytnik grup dyskusyjnych i klient poczty dla Emacsa/XEmacsa
@@ -60,8 +63,8 @@ Summary:	Gnus elisp files for GNU Emacs
 Summary(pl.UTF-8):	Kod elisp Gnusa dla GNU Emacsa
 Group:		Applications/Networking
 Requires:	%{name} = %{version}-%{release}
+%requires_eq	emacs
 Provides:	gnus-elisp-code = %{version}-%{release}
-%requires_eq emacs
 
 %description emacs
 This package contains compiled elisp files needed to run Gnus on GNU Emacs
@@ -86,6 +89,7 @@ Summary:	Gnus elisp files for XEmacs
 Summary(pl.UTF-8):	Kod elisp Gnusa dla XEmacsa
 Group:		Applications/Networking
 Requires:	%{name} = %{version}-%{release}
+%requires_eq	xemacs
 Requires:	xemacs-mail-lib-pkg
 Requires:	xemacs-eterm-pkg
 Requires:	xemacs-sh-script-pkg
@@ -95,7 +99,6 @@ Requires:	xemacs-mh-e-pkg
 Requires:	xemacs-mailcrypt-pkg
 Requires:	xemacs-fsf-compat-pkg
 Provides:	gnus-elisp-code = %{version}-%{release}
-%requires_eq xemacs
 
 %description xemacs
 This package contains compiled elisp files needed to run Gnus on XEmacs
@@ -144,7 +147,8 @@ mkdir DUMMY
 %{__make} -C texi pdf
 %endif
 
-%{__make} DESTDIR=$(pwd)/DUMMY install
+%{__make} install \
+	DESTDIR=$(pwd)/DUMMY
 %{__make} distclean
 %endif
 
@@ -159,7 +163,8 @@ mkdir DUMMY
 %{__make} -C texi pdf
 %endif
 
-%{__make} DESTDIR=$(pwd)/DUMMY install
+%{__make} install \
+	DESTDIR=$(pwd)/DUMMY
 %endif
 
 %install
@@ -175,7 +180,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ChangeLog GNUS-NEWS README todo contrib
 %{_datadir}/%{_the_name}
-%{_infodir}/*
+%{_infodir}/*.info*
 
 %if %{with emacs}
 %files emacs
