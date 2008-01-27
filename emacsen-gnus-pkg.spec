@@ -6,7 +6,7 @@ Summary:	An Emacs/XEmacs newsreader and mail client
 Summary(pl.UTF-8):	Czytnik grup dyskusyjnych i klient poczty dla Emacsa/XEmacsa
 Name:		emacsen-gnus-pkg
 Version:	5.10.6
-Release:	3
+Release:	5
 License:	GPL
 Group:		Applications/Networking
 Source0:	http://www.gnus.org/dist/%{_the_name}-%{version}.tar.gz
@@ -55,16 +55,13 @@ w tym z serwera NNTP, lokalnego spoola jak i plików mbox.
 
 Ten pakiet zawiera pliki Gnusa wspólne dla GNU Emacsa i XEmacsa.
 
-%define version_of() %{expand:%%(rpm -q %1 --queryformat '%%%%{version}-%%%%{release}')}
-
-%if %{with emacs}
 %package emacs
 Summary:	Gnus elisp files for GNU Emacs
 Summary(pl.UTF-8):	Kod elisp Gnusa dla GNU Emacsa
 Group:		Applications/Networking
 Requires:	%{name} = %{version}-%{release}
-Requires:	emacs = %{version_of emacs}
 Provides:	gnus-elisp-code = %{version}-%{release}
+%requires_eq emacs
 
 %description emacs
 This package contains compiled elisp files needed to run Gnus on GNU Emacs
@@ -83,16 +80,12 @@ This package contains source elisp files needed to run Gnus on GNU Emacs
 
 %description emacs-el -l pl.UTF-8
 Pakiet zawiera źródłowe pliki elisp z kodem Gnusa dla GNU Emacsa.
-%endif
 
-
-%if %{with xemacs}
 %package xemacs
 Summary:	Gnus elisp files for XEmacs
 Summary(pl.UTF-8):	Kod elisp Gnusa dla XEmacsa
 Group:		Applications/Networking
 Requires:	%{name} = %{version}-%{release}
-Requires:	xemacs = %{version_of xemacs}
 Requires:	xemacs-mail-lib-pkg
 Requires:	xemacs-eterm-pkg
 Requires:	xemacs-sh-script-pkg
@@ -102,6 +95,7 @@ Requires:	xemacs-mh-e-pkg
 Requires:	xemacs-mailcrypt-pkg
 Requires:	xemacs-fsf-compat-pkg
 Provides:	gnus-elisp-code = %{version}-%{release}
+%requires_eq emacs
 
 %description xemacs
 This package contains compiled elisp files needed to run Gnus on XEmacs
@@ -120,10 +114,7 @@ This package contains source elisp files needed to run Gnus on XEmacs
 
 %description xemacs-el -l pl.UTF-8
 Pakiet zawiera pliki źródłowe elisp z kodem Gnusa dla XEmacsa.
-%endif
 
-
-%if %{with pdf_doc}
 %package pdf-doc
 Summary:	PDF documentation for Gnus
 Summary(pl.UTF-8):	Dokumentacja Gnusa w formacie PDF
@@ -134,36 +125,30 @@ Documentation for Gnus in PDF format
 
 %description pdf-doc -l pl.UTF-8
 Dokumentacja Gnusa w formacie PDF
-%endif
-
 
 %prep
 %setup -q -n %{_the_name}-%{version}
 %patch0 -p1
 
-
 %build
 mkdir DUMMY
 
 %if %{with xemacs}
-
 %configure \
 	--with-xemacs \
 	--with-lispdir=%{_datadir}/xemacs-packages/lisp/%{_the_name} \
 	--with-etcdir=%{_datadir}/%{_the_name}
 %{__make}
 
-%if !%{with emacs} && %{with pdf_doc}
+%if %{without emacs} && %{with pdf_doc}
 %{__make} -C texi pdf
 %endif
 
-%{__make} DESTDIR=`pwd`/DUMMY install
+%{__make} DESTDIR=$(pwd)/DUMMY install
 %{__make} distclean
-
 %endif
 
 %if %{with emacs}
-
 %configure \
 	--with-emacs \
 	--with-lispdir=%{_emacs_lispdir}/%{_the_name} \
@@ -174,22 +159,21 @@ mkdir DUMMY
 %{__make} -C texi pdf
 %endif
 
-%{__make} DESTDIR=`pwd`/DUMMY install
-
+%{__make} DESTDIR=$(pwd)/DUMMY install
 %endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
 cp -R ./DUMMY $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_datadir}/xemacs-packages/etc
-ln -s ../../gnus $RPM_BUILD_ROOT%{_datadir}/xemacs-packages/etc/
+ln -s ../../gnus $RPM_BUILD_ROOT%{_datadir}/xemacs-packages/etc
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ChangeLog GNUS-NEWS README todo contrib/
+%doc ChangeLog GNUS-NEWS README todo contrib
 %{_datadir}/%{_the_name}
 %{_infodir}/*
 
