@@ -6,7 +6,7 @@ Summary:	An Emacs/XEmacs newsreader and mail client
 Summary(pl.UTF-8):	Czytnik grup dyskusyjnych i klient poczty dla Emacsa/XEmacsa
 Name:		emacsen-gnus-pkg
 Version:	5.10.6
-Release:	5
+Release:	6
 License:	GPL
 Group:		Applications/Networking
 Source0:	http://www.gnus.org/dist/%{_the_name}-%{version}.tar.gz
@@ -95,7 +95,7 @@ Requires:	xemacs-mh-e-pkg
 Requires:	xemacs-mailcrypt-pkg
 Requires:	xemacs-fsf-compat-pkg
 Provides:	gnus-elisp-code = %{version}-%{release}
-%requires_eq emacs
+%requires_eq xemacs
 
 %description xemacs
 This package contains compiled elisp files needed to run Gnus on XEmacs
