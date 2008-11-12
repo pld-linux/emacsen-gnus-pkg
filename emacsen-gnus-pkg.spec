@@ -8,12 +8,12 @@
 Summary:	An Emacs/XEmacs newsreader and mail client
 Summary(pl.UTF-8):	Czytnik grup dyskusyjnych i klient poczty dla Emacsa/XEmacsa
 Name:		emacsen-gnus-pkg
-Version:	5.10.6
-Release:	7
+Version:	5.10.10
+Release:	0.1
 License:	GPL
 Group:		Applications/Networking
 Source0:	http://www.gnus.org/dist/%{_the_name}-%{version}.tar.gz
-# Source0-md5:	8b510e5d2530f92af371eb64f828b257
+# Source0-md5:	dd4ea349448a005ff5d068ba57ad9bca
 Patch0:		%{name}-destdir.patch
 URL:		http://www.gnus.org/
 %if %{with pdf_doc}
