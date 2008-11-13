@@ -25,41 +25,39 @@ diff -ur gnus-5.10.6-vanilla/Makefile.in gnus-5.10.6/Makefile.in
 diff -ur gnus-5.10.6-vanilla/etc/Makefile.in gnus-5.10.6/etc/Makefile.in
 --- gnus-5.10.6-vanilla/etc/Makefile.in	2003-02-01 17:40:40.000000000 +0100
 +++ gnus-5.10.6/etc/Makefile.in	2004-04-22 17:17:11.811880720 +0200
-@@ -13,26 +13,28 @@
+@@ -13,24 +13,26 @@
  INSTALL_DATA = @INSTALL_DATA@
  SHELL = /bin/sh
  
 +DESTDIR =
 +
- all: 
- 
- install: 
--	$(SHELL) $(top_srcdir)/mkinstalldirs $(etcdir)
-+	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(etcdir)
- 	cd $(srcdir) \
+ install:
+-	$(SHELL) $(top_srcdir)/mkinstalldirs "$(etcdir)"
++	$(SHELL) $(top_srcdir)/mkinstalldirs "$(DESTDIR)$(etcdir)"
+ 	@cd $(srcdir) \
  	&& for p in gnus-tut.txt; do \
--	  echo " $(INSTALL_DATA) $$p $(etcdir)/$$p"; \
--	  $(INSTALL_DATA) $$p $(etcdir)/$$p; \
-+	  echo " $(INSTALL_DATA) $$p $(DESTDIR)$(etcdir)/$$p"; \
-+	  $(INSTALL_DATA) $$p $(DESTDIR)$(etcdir)/$$p; \
+-	  echo "$(INSTALL_DATA) $$p \"$(etcdir)/$$p\""; \
+-	  $(INSTALL_DATA) $$p "$(etcdir)/$$p"; \
++	  echo "$(INSTALL_DATA) $$p \"$(DESTDIR)$(etcdir)/$$p\""; \
++	  $(INSTALL_DATA) $$p "$(DESTDIR)$(etcdir)/$$p"; \
  	done
--	$(SHELL) $(top_srcdir)/mkinstalldirs $(etcdir)/gnus
-+	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(etcdir)/gnus
- 	cd $(srcdir) \
- 	&& for p in gnus/*.xpm gnus/*.pbm gnus/*.xbm gnus/x-splash; do \
--	  echo " $(INSTALL_DATA) $$p $(etcdir)/$$p"; \
--	  $(INSTALL_DATA) $$p $(etcdir)/$$p; \
-+	  echo " $(INSTALL_DATA) $$p $(DESTDIR)$(etcdir)/$$p"; \
-+	  $(INSTALL_DATA) $$p $(DESTDIR)$(etcdir)/$$p; \
+-	$(SHELL) $(top_srcdir)/mkinstalldirs "$(etcdir)/images/gnus"
++	$(SHELL) $(top_srcdir)/mkinstalldirs "$(DESTDIR)$(etcdir)/images/gnus"
+ 	@cd $(srcdir) \
+ 	&& for p in images/gnus/*.xpm images/gnus/*.pbm images/gnus/*.xbm images/gnus/x-splash; do \
+-	  echo "$(INSTALL_DATA) $$p \"$(etcdir)/$$p\""; \
+-	  $(INSTALL_DATA) $$p "$(etcdir)/$$p"; \
++	  echo "$(INSTALL_DATA) $$p \"$(DESTDIR)$(etcdir)/$$p\""; \
++	  $(INSTALL_DATA) $$p "$(DESTDIR)$(etcdir)/$$p"; \
  	done
--	$(SHELL) $(top_srcdir)/mkinstalldirs $(etcdir)/smilies
-+	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(etcdir)/smilies
- 	cd $(srcdir) \
- 	&& for p in smilies/*.pbm smilies/*.xpm; do \
--	  echo " $(INSTALL_DATA) $$p $(etcdir)/$$p"; \
--	  $(INSTALL_DATA) $$p $(etcdir)/$$p; \
-+	  echo " $(INSTALL_DATA) $$p $(DESTDIR)$(etcdir)/$$p"; \
-+	  $(INSTALL_DATA) $$p $(DESTDIR)$(etcdir)/$$p; \
+-	$(SHELL) $(top_srcdir)/mkinstalldirs "$(etcdir)/images/smilies"
++	$(SHELL) $(top_srcdir)/mkinstalldirs "$(DESTDIR)$(etcdir)/images/smilies"
+ 	@cd $(srcdir) \
+ 	&& for p in images/smilies/*.pbm images/smilies/*.xpm; do \
+-	  echo "$(INSTALL_DATA) $$p \"$(etcdir)/$$p\""; \
+-	  $(INSTALL_DATA) $$p "$(etcdir)/$$p"; \
++	  echo "$(INSTALL_DATA) $$p \"$(DESTDIR)$(etcdir)/$$p\""; \
++	  $(INSTALL_DATA) $$p "$(DESTDIR)$(etcdir)/$$p"; \
  	done
  
  uninstall: 
@@ -68,71 +66,99 @@ diff -ur gnus-5.10.6-vanilla/lisp/Makefile.in gnus-5.10.6/lisp/Makefile.in
 +++ gnus-5.10.6/lisp/Makefile.in	2004-04-22 17:08:46.452706992 +0200
 @@ -15,6 +15,8 @@
  URLDIR = @URL@
- EMACS_COMP = URLDIR=$(URLDIR) W3DIR=$(W3DIR) lispdir=$(lispdir) srcdir=$(srcdir) $(EMACS) $(FLAGS)
+ EMACS_COMP = URLDIR=$(URLDIR) W3DIR=$(W3DIR) lispdir="$(lispdir)" srcdir=$(srcdir) $(EMACS) $(FLAGS)
  
 +DESTDIR =
 +
  all total: clean-some gnus-load.el
  	$(EMACS_COMP) -f dgnushack-compile
  
-@@ -32,23 +34,23 @@
- install: install-el install-elc 
+@@ -32,36 +34,36 @@
  
+ # This entry will never install .el files if there are no .elc files.
  install-el: gnus-load.el
--	$(SHELL) $(top_srcdir)/mkinstalldirs $(lispdir)
--	echo " $(INSTALL_DATA) gnus-load.el $(lispdir)/gnus-load.el"
--	$(INSTALL_DATA) gnus-load.el $(lispdir)/gnus-load.el
-+	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(lispdir)
-+	echo " $(INSTALL_DATA) gnus-load.el $(DESTDIR)$(lispdir)/gnus-load.el"
-+	$(INSTALL_DATA) gnus-load.el $(DESTDIR)$(lispdir)/gnus-load.el
- 	for p in *.elc; do \
+-	$(SHELL) $(top_srcdir)/mkinstalldirs "$(lispdir)"
+-	$(INSTALL_DATA) gnus-load.el "$(lispdir)/gnus-load.el"
++	$(SHELL) $(top_srcdir)/mkinstalldirs "$(DESTDIR)$(lispdir)"
++	$(INSTALL_DATA) gnus-load.el "$(DESTDIR)$(lispdir)/gnus-load.el"
+ 	@for p in *.elc; do \
  	  p=`basename $$p c`; \
  	  if [ -f "$(srcdir)/$$p" ]; then \
--	    echo " $(INSTALL_DATA) $$p $(lispdir)/$$p"; \
--	    $(INSTALL_DATA) $(srcdir)/$$p $(lispdir)/$$p; \
-+	    echo " $(INSTALL_DATA) $$p $(DESTDIR)$(lispdir)/$$p"; \
-+	    $(INSTALL_DATA) $(srcdir)/$$p $(DESTDIR)$(lispdir)/$$p; \
+-	    echo "$(INSTALL_DATA) $$p \"$(lispdir)/$$p\""; \
+-	    $(INSTALL_DATA) $(srcdir)/$$p "$(lispdir)/$$p"; \
++	    echo "$(INSTALL_DATA) $$p \"$(DESTDIR)$(lispdir)/$$p\""; \
++	    $(INSTALL_DATA) $(srcdir)/$$p "$(DESTDIR)$(lispdir)/$$p"; \
  	  fi; \
  	done
  
  install-elc: clever
  	rm -f dgnushack.elc
--	$(SHELL) $(top_srcdir)/mkinstalldirs $(lispdir)
-+	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(lispdir)
- 	for p in *.elc; do \
--	  echo " $(INSTALL_DATA) $$p $(lispdir)/$$p"; \
--	  $(INSTALL_DATA) $$p $(lispdir)/$$p; \
-+	  echo " $(INSTALL_DATA) $$p $(DESTDIR)$(lispdir)/$$p"; \
-+	  $(INSTALL_DATA) $$p $(DESTDIR)$(lispdir)/$$p; \
+-	$(SHELL) $(top_srcdir)/mkinstalldirs "$(lispdir)"
++	$(SHELL) $(top_srcdir)/mkinstalldirs "$(DESTDIR)$(lispdir)"
+ 	@for p in *.elc; do \
+-	  echo "$(INSTALL_DATA) $$p \"$(lispdir)/$$p\""; \
+-	  $(INSTALL_DATA) $$p "$(lispdir)/$$p"; \
++	  echo "$(INSTALL_DATA) $$p \"$(DESTDIR)$(lispdir)/$$p\""; \
++	  $(INSTALL_DATA) $$p "$(DESTDIR)$(lispdir)/$$p"; \
  	done
  
- uninstall:
+ install-el-elc: clever
+ 	rm -f dgnushack.elc
+-	$(SHELL) $(top_srcdir)/mkinstalldirs "$(lispdir)"
+-	$(INSTALL_DATA) gnus-load.el "$(lispdir)/gnus-load.el"
++	$(SHELL) $(top_srcdir)/mkinstalldirs "$(DESTDIR)$(lispdir)"
++	$(INSTALL_DATA) gnus-load.el "$(DESTDIR)$(lispdir)/gnus-load.el"
+ 	@for p in *.elc; do \
+ 	  q=`basename $$p c`; \
+ 	  if [ -f "$(srcdir)/$$q" ]; then \
+-	    echo "$(INSTALL_DATA) $$q \"$(lispdir)/$$q\""; \
+-	    $(INSTALL_DATA) $(srcdir)/$$q "$(lispdir)/$$q"; \
++	    echo "$(INSTALL_DATA) $$q \"$(DESTDIR)$(lispdir)/$$q\""; \
++	    $(INSTALL_DATA) $(srcdir)/$$q "$(DESTDIR)$(lispdir)/$$q"; \
+ 	  fi; \
+-	  echo "$(INSTALL_DATA) $$p \"$(lispdir)/$$p\""; \
+-	  $(INSTALL_DATA) $$p "$(lispdir)/$$p"; \
++	  echo "$(INSTALL_DATA) $$p \"$(DESTDIR)$(lispdir)/$$p\""; \
++	  $(INSTALL_DATA) $$p "$(DESTDIR)$(lispdir)/$$p"; \
+ 	done
+ 
+ list-installed-shadows:
 diff -ur gnus-5.10.6-vanilla/texi/Makefile.in gnus-5.10.6/texi/Makefile.in
 --- gnus-5.10.6-vanilla/texi/Makefile.in	2003-10-18 15:08:27.000000000 +0200
 +++ gnus-5.10.6/texi/Makefile.in	2004-04-22 17:15:56.217372832 +0200
 @@ -20,6 +20,8 @@
- PAPERTYPE=a4
- INFO_DEPS=gnus message emacs-mime sieve pgg
+ REFCARD=gnus-refcard
+ LOGO=gnus-logo
  
 +DESTDIR =
 +
  all: $(INFO_DEPS)
  
  most: texi2latex.elc latex latexps
-@@ -181,13 +183,13 @@
+@@ -181,21 +183,21 @@
  	rm -f gnusconfig.tex
  
  install: $(INFO_DEPS)
--	$(SHELL) $(top_srcdir)/mkinstalldirs $(infodir)
-+	$(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(infodir)
+-	$(SHELL) $(top_srcdir)/mkinstalldirs "$(infodir)"
++	$(SHELL) $(top_srcdir)/mkinstalldirs "$(DESTDIR)$(infodir)"
  	@list='$(INFO_DEPS)'; \
  	for file in $$list; do \
  	  for ifile in `echo $$file $$file-[0-9] $$file-[0-9][0-9]`; do \
  	    if test -f $$ifile; then \
--	      echo " $(INSTALL_DATA) $$ifile $(infodir)/$$ifile"; \
--	      $(INSTALL_DATA) $$ifile $(infodir)/$$ifile; \
-+	      echo " $(INSTALL_DATA) $$ifile $(DESTDIR)$(infodir)/$$ifile"; \
-+	      $(INSTALL_DATA) $$ifile $(DESTDIR)$(infodir)/$$ifile; \
+-	      echo "$(INSTALL_DATA) $$ifile \"$(infodir)/$$ifile\""; \
+-	      $(INSTALL_DATA) $$ifile "$(infodir)/$$ifile"; \
++	      echo "$(INSTALL_DATA) $$ifile \"$(DESTDIR)$(infodir)/$$ifile\""; \
++	      $(INSTALL_DATA) $$ifile "$(DESTDIR)$(infodir)/$$ifile"; \
  	    else : ; fi; \
  	  done; \
  	done
+ 	@if $(SHELL) -c 'install-info --version | sed 1q | fgrep -s -v -i debian' >/dev/null 2>&1; then \
+ 	  list='$(INFO_DEPS)'; \
+ 	  for file in $$list; do \
+-	    echo "install-info --info-dir=\"$(infodir)\" \"$(infodir)/$$file\"";\
+-	    install-info --info-dir="$(infodir)" "$(infodir)/$$file" || :;\
++	    echo "install-info --info-dir=\"$(infodir)\" \"$(DESTDIR)$(infodir)/$$file\"";\
++	    install-info --info-dir="$(infodir)" "$(DESTDIR)$(infodir)/$$file" || :;\
+ 	  done; \
+ 	else : ; fi
+ 
