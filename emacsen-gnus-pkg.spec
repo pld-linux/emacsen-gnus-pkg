@@ -28,15 +28,16 @@ BuildRequires:	emacs
 %endif
 %if %{with xemacs}
 BuildRequires:	xemacs
-BuildRequires:	xemacs-mail-lib-pkg
-BuildRequires:	xemacs-eterm-pkg
-BuildRequires:	xemacs-sh-script-pkg
-BuildRequires:	xemacs-os-utils-pkg
 BuildRequires:	xemacs-dired-pkg
-BuildRequires:	xemacs-mh-e-pkg
-BuildRequires:	xemacs-mailcrypt-pkg
+BuildRequires:	xemacs-eterm-pkg
 BuildRequires:	xemacs-fsf-compat-pkg
+BuildRequires:	xemacs-mail-lib-pkg
+BuildRequires:	xemacs-mailcrypt-pkg
+BuildRequires:	xemacs-mh-e-pkg
+BuildRequires:	xemacs-os-utils-pkg
+BuildRequires:	xemacs-sh-script-pkg
 BuildRequires:	xemacs-texinfo-pkg
+BuildRequires:	xemacs-w3-pkg
 %endif
 Requires:	gnus-elisp-code = %{version}-%{release}
 Requires:	starttls
@@ -144,7 +145,7 @@ mkdir DUMMY
 %{__make}
 
 %if %{without emacs} && %{with pdf_doc}
-%{__make} -C texi pdf
+%{__make} -j1 -C texi pdf
 %endif
 
 %{__make} install \
@@ -160,7 +161,7 @@ mkdir DUMMY
 %{__make}
 
 %if %{with pdf_doc}
-%{__make} -C texi pdf
+%{__make} -j1 -C texi pdf
 %endif
 
 %{__make} install \
@@ -172,6 +173,10 @@ rm -rf $RPM_BUILD_ROOT
 cp -R ./DUMMY $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_datadir}/xemacs-packages/etc
 ln -s ../../gnus $RPM_BUILD_ROOT%{_datadir}/xemacs-packages/etc
+
+for ff in $RPM_BUILD_ROOT%{_infodir}/* ; do
+	mv -f $ff $ff.info
+done
 
 %clean
 rm -rf $RPM_BUILD_ROOT
