@@ -1,18 +1,15 @@
 #
-# This package is archaic and aoutdated and exist until there is xemacs release
-# with bundled GNUS as it is with GNU Emacs. See web page for details.
-#
 # Conditional build:
-%bcond_without	xemacs	# Build without XEmacs support
+%bcond_with	xemacs	# Build without XEmacs support
 %bcond_with	emacs	# Build with GNU Emacs support
-%bcond_without	pdf_doc	# Don't build PDF documentation
+%bcond_with	pdf_doc	# Don't build PDF documentation
 #
 %define		_the_name gnus
 Summary:	An Emacs/XEmacs newsreader and mail client
 Summary(pl.UTF-8):	Czytnik grup dyskusyjnych i klient poczty dla Emacsa/XEmacsa
 Name:		emacsen-gnus-pkg
 Version:	5.10.10
-Release:	6
+Release:	6.see-web-page-why-not-this-package
 License:	GPL
 Group:		Applications/Networking
 Source0:	http://www.gnus.org/dist/%{_the_name}-%{version}.tar.gz
