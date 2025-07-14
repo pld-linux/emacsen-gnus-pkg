@@ -132,7 +132,7 @@ Dokumentacja Gnusa w formacie PDF
 
 %prep
 %setup -q -n %{_the_name}-%{version}
-%patch0 -p1
+%patch -P0 -p1
 
 %build
 mkdir DUMMY
